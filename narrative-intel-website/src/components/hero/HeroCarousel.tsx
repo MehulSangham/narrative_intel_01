@@ -105,12 +105,11 @@ export function HeroCarousel() {
   const isSymbol = eyebrowItem.mode === 'symbol'
   const isMorse = eyebrowItem.mode === 'morse'
   const COLOR_MAP: Record<string, string> = {
-    // palette: deep red coral, green, blue, black
-    'contested truth': '#111111', // black
-    'climate change': '#16a34a', // green
-    'political instability': '#e24d3a', // deep red coral
-    'economic inequality': '#2563eb', // blue
-    'artificial intelligence': '#2563eb', // blue
+    'contested truth': '#7C3AED', // violet
+    'climate change': '#16A34A', // green
+    'political instability': '#E24D3A', // coral
+    'economic inequality': '#2563EB', // blue
+    'artificial intelligence': '#2563EB', // blue (shared)
   }
   const accentColor = COLOR_MAP[current.term] ?? '#111111'
   const ICON_MAP: Record<string, React.ComponentType<{ size?: number; color?: string; strokeWidth?: number; className?: string }>> = {
