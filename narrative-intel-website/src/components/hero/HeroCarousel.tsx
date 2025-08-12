@@ -272,11 +272,11 @@ export function HeroCarousel() {
 
       {/* CTA moved into the text column above */}
 
-      {/* Centered minimal dots with progress sweep */}
-      <div className="mt-5 flex w-full items-center justify-center gap-3" role="tablist" aria-label="Topics">
+      {/* Centered simple one-color dots */}
+      <div className="mt-5 flex w-full items-center justify-center gap-2.5" role="tablist" aria-label="Topics">
         {SLIDES.map((s, i) => {
-          const color = COLOR_MAP[s.term] ?? '#111111'
           const isActive = i === index
+          const neutral = '#7a7368'
           return (
             <button
               key={s.term}
@@ -284,46 +284,21 @@ export function HeroCarousel() {
               aria-selected={isActive}
               aria-label={s.term}
               onClick={() => setIndex(i)}
-              className="relative h-6 w-6 inline-flex items-center justify-center rounded-full focus:outline-none focus-visible:ring-2"
-              style={{
-                // subtle focus ring in accent
-                // @ts-ignore
-                ['--ring-color' as any]: color,
-              }}
+              className="h-5 w-5 inline-flex items-center justify-center rounded-full focus:outline-none"
             >
               <span
-                className="absolute inset-0 rounded-full"
+                className="block h-1.5 w-1.5 rounded-full"
                 style={{
-                  boxShadow: `inset 0 0 0 2px ${isActive ? color : hexToRgba(color, 0.4)}`,
+                  backgroundColor: isActive ? neutral : 'transparent',
+                  boxShadow: `inset 0 0 0 1.5px ${neutral}`,
+                  opacity: isActive ? 1 : 0.6,
+                  transition: 'opacity 160ms ease',
                 }}
-              />
-              {/* progress sweep for active dot */}
-              {isActive && !prefersReducedMotion ? (
-                <span
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: `conic-gradient(${color} 0deg, transparent 0deg)`,
-                    WebkitMask: 'radial-gradient(circle, transparent 6px, black 6px)',
-                    mask: 'radial-gradient(circle, transparent 6px, black 6px)',
-                    animation: `sweep ${AUTO_PLAY_MS}ms linear forwards`,
-                    animationPlayState: isHovering ? 'paused' : 'running',
-                  }}
-                />
-              ) : null}
-              <span
-                className="relative block h-2 w-2 rounded-full"
-                style={{ backgroundColor: isActive ? hexToRgba(color, 0.25) : '#f6f3ea' }}
               />
             </button>
           )
         })}
       </div>
-      <style jsx>{`
-        @keyframes sweep {
-          from { background: conic-gradient(var(--accent, #111) 0deg, transparent 0deg); }
-          to { background: conic-gradient(var(--accent, #111) 360deg, transparent 0deg); }
-        }
-      `}</style>
 
       {/* No manual controls; term changes via autoplay only */}
     </div>
