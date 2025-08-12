@@ -14,11 +14,11 @@ type Slide = {
 }
 
 const TERMS = [
-  'contested truth',
-  'climate change',
   'political instability',
-  'economic inequality',
+  'climate change',
   'artificial intelligence',
+  'contested truth',
+  'economic inequality',
 ] as const
 
 const MAX_TERM_CH = TERMS.reduce((m, t) => Math.max(m, t.length), 0)
