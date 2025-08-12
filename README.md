@@ -1,134 +1,51 @@
-# Data Dashboard Components
+# Narrative Intelligence Website
 
-A React TypeScript project showcasing time series chart components generated from Figma designs using AI-powered design-to-code workflow.
+This repository contains the Narrative Intelligence website built with Next.js (App Router), TypeScript, and Tailwind CSS (v4).
 
-## 🎨 Design-to-Code Workflow
+## Structure
 
-This project demonstrates the complete bidirectional workflow between Figma and code:
+- `narrative-intel-website/` – Next.js app
+  - `src/app/` – routes and layouts
+  - `src/components/hero/` – hero carousel and figure
+  - `src/components/layout/` – header and footer
+  - `src/components/sections/` – content sections (WhatIsNI, HowWeWork)
+  - `public/` – static assets (e.g., images)
 
-1. **Design in Figma**: Created professional time series charts with proper styling, axes, grid lines, and data visualization
-2. **Extract Design Data**: Used Figma MCP integration to read design specifications (colors, dimensions, typography)
-3. **Generate React Code**: Automatically converted Figma designs into production-ready React TypeScript components
-
-## ✨ Features
-
-- **TimeSeriesChart Component**: Professional data visualization component
-- **Configurable**: Customizable title, data, dimensions
-- **Responsive**: SVG-based charts that scale properly
-- **TypeScript**: Full type safety with proper interfaces
-- **Modern Styling**: Matches Figma design specifications exactly
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
+## Run locally
 
 ```bash
-# Install dependencies
+cd narrative-intel-website
 npm install
-
-# Start development server
 npm run dev
+# open http://127.0.0.1:3000
 ```
 
-### Usage
+## Key pages/sections
 
-```tsx
-import TimeSeriesChart from './TimeSeriesChart';
+- Hero with carousel (autoplay, accessible)
+- What is Narrative Intelligence? (video + explainer)
+- How we work (Sense → Map → Act rail + timeline)
+- Services index and detail pages:
+  - `/services`
+  - `/services/niq-audit`
+  - `/services/narrative-mapping`
+  - `/services/building-capacity`
 
-const data = [
-  { month: "Jan", value: 250000 },
-  { month: "Mar", value: 480000 },
-  { month: "May", value: 620000 },
-  { month: "Jul", value: 850000 }
-];
+## Design system
 
-<TimeSeriesChart 
-  title="Revenue Growth Over Time"
-  data={data}
-  width={600}
-  height={400}
-/>
-```
+- Inter font via `next/font`
+- Sand background `#f6f3ea`
+- 12‑column grid at `xl`, stacked before that
+- Quiet CTAs (underlined links), rounded 12px surfaces, subtle borders
 
-## 🎯 Component API
+## Deploy
 
-### TimeSeriesChart Props
+Deploy on Vercel for the best experience:
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `title` | `string` | "Revenue Growth Over Time" | Chart title |
-| `data` | `DataPoint[]` | Sample revenue data | Array of data points |
-| `width` | `number` | 600 | Chart width in pixels |
-| `height` | `number` | 400 | Chart height in pixels |
+1. Connect this GitHub repo
+2. Framework: Next.js; build command: `next build`; output: `.next`
+3. Environment: Node 18+
 
-### DataPoint Interface
+## License
 
-```tsx
-interface DataPoint {
-  month: string;
-  value: number;
-}
-```
-
-## 🎨 Design Specifications
-
-The component matches the exact Figma design specifications:
-
-- **Container**: `#fafafc` background, `#e5e5eb` border, 12px border radius
-- **Typography**: Inter font family, 20px title, 12px labels
-- **Data Line**: `#3399ff` color, 3px stroke width
-- **Grid Lines**: `#e6e6e6` color for subtle visual guides
-- **Axes**: `#b3b3b3` color for clean separation
-
-## 🛠 Development
-
-### Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run type-check` - Run TypeScript type checking
-
-### Tech Stack
-
-- **React 18** - Modern React with hooks
-- **TypeScript** - Type-safe development
-- **Vite** - Fast build tool and dev server
-- **SVG** - Scalable vector graphics for charts
-
-## 🔗 Integration
-
-This project demonstrates the power of combining:
-
-- **Figma** for professional design
-- **Cursor** for AI-powered development
-- **MCP (Model Context Protocol)** for tool integration
-- **WebSocket** for real-time communication
-
-## 📊 Example Data
-
-The component comes with sample data showing:
-
-- Revenue growth from $250K to $850K over 7 months
-- User growth from 12K to 42K users
-- Performance metrics visualization
-
-## 🎯 Future Enhancements
-
-- Interactive tooltips on hover
-- Multiple data series support
-- Animation transitions
-- Export to PNG/SVG functionality
-- Theme customization
-- Mobile responsive breakpoints
-
----
-
-✨ **Generated from Figma designs using AI-powered design-to-code workflow**
-
-Created with Cursor + Figma MCP integration 
+Copyright © Narrative Intelligence. All rights reserved.
