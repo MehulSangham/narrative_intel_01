@@ -162,10 +162,10 @@ export function HeroCarousel() {
       onMouseLeave={() => setIsHovering(false)}
     >
         <div
-          className="relative max-w-none grid grid-cols-1 xl:grid-cols-12 gap-6 xl:gap-8 items-start xl:items-end"
+          className="relative max-w-none grid grid-cols-1 xl:grid-cols-12 gap-6 xl:gap-8 items-start xl:items-center"
           style={{ minHeight: 'clamp(480px, 48svh, 640px)' }}
         >
-          <div className="relative order-1 xl:order-none xl:col-span-8 2xl:col-span-8 xl:pr-8 2xl:pr-10 z-10">
+          <div className="relative order-1 xl:order-none xl:col-span-8 2xl:col-span-8 xl:pr-8 2xl:pr-10 z-10 xl:flex xl:flex-col xl:justify-center">
           <div className="mb-6">
             <div className="relative inline-block">
               <span
