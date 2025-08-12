@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  /* Menu motion tokens */
+  --menu-line-1: #ff7f50; /* coral */
+  --menu-line-2: #007fff; /* azure blue */
+  --menu-line-3: #ff00ff; /* magenta */
+  --menu-line-width: 28px;
+  --menu-sweep-duration: 2000ms;
+  --menu-sweep-stagger: 140ms;
+  --menu-overlay-fade: 240ms;
+  --menu-band: 56px; /* gradient band width */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Page push interaction to imply the sweep is pulling the page */
+/* disable page push for now */
+.site-content { transition: transform 300ms ease-out; transform: none; }
+.menu-open .site-content { transform: none; }
+.menu-closing .site-content { transform: none; }
+
+/* Three-pillar (vertical) transition for menu takeover */
+@keyframes pillar-sweep {
+  0%   { transform: translateX(-15vw); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translateX(115vw); opacity: 1; }
+}
+
+@keyframes pillar-sweep-exit {
+  0%   { transform: translateX(115vw); opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateX(-15vw); opacity: 0; }
+}
+
+/* Remove three-pillar lines; single multicolor sweep leads the overlay */
+
+/* Gradient sweep that pulls the overlay (closer to 1HQ) */
+@keyframes gradient-sweep {
+  0%   { transform: translateX(-110vw); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translateX(110vw); opacity: 1; }
+}
+
+@keyframes gradient-sweep-exit {
+  0%   { transform: translateX(110vw); opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateX(-110vw); opacity: 0; }
+}
+
+/* Sweep layer used as accent */
+.menu-overlay-sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 95; /* above scrim, below content */
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--menu-line-1) 0 calc(var(--menu-band) * 1),
+    var(--menu-line-2) calc(var(--menu-band) * 1) calc(var(--menu-band) * 2),
+    var(--menu-line-3) calc(var(--menu-band) * 2) calc(var(--menu-band) * 3)
+  );
+  background-size: auto 100%;
+  transform: translateX(-110vw);
+  opacity: 0;
+}
+
+/* Activate sweep on open/close */
+.menu-open .menu-overlay-sweep {
+  animation: gradient-sweep var(--menu-sweep-duration) cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+  opacity: 1;
+}
+.menu-closing .menu-overlay-sweep {
+  animation: gradient-sweep-exit var(--menu-sweep-duration) cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+  opacity: 1;
+}
+
+/* Drawer surface pattern (bands attached to leading edge) */
+.menu-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 96;
+  background: #000;
+  transform: translateX(-100%);
+  transition: transform var(--menu-sweep-duration) cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+.menu-open .menu-drawer { transform: translateX(0); }
+.menu-closing .menu-drawer { transform: translateX(-100%); }
+
+.menu-lead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--menu-lead);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--menu-line-1) 0 calc(var(--menu-band) * 1),
+    var(--menu-line-2) calc(var(--menu-band) * 1) calc(var(--menu-band) * 2),
+    var(--menu-line-3) calc(var(--menu-band) * 2) calc(var(--menu-band) * 3)
+  );
+}
+.menu-open .menu-lead { left: 0; right: auto; }
+.menu-closing .menu-lead { right: 0; left: auto; }
+
+/* keep sweep accent in use */
+
+.menu-overlay-lines .line.delay-1 { animation-delay: calc(var(--menu-sweep-stagger) * 1); }
+.menu-overlay-lines .line.delay-2 { animation-delay: calc(var(--menu-sweep-stagger) * 2); }
+.menu-overlay-lines .line.delay-3 { animation-delay: calc(var(--menu-sweep-stagger) * 3); }
+
+/* Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .site-content,
+  .menu-overlay-lines .line {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .menu-open .site-content::after { background: rgba(0,0,0,1); }
+}
+
+/* Hero "signal" underline sweep */
+@keyframes signal-sweep {
+  0% { transform: translateX(-30%); }
+  100% { transform: translateX(110%); }
+}
+
+.signal-underline {
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 3px;
+  width: 0%;
+  background: #111;
+  transition: width 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  overflow: hidden;
+}
+
+.signal-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 24%;
+  opacity: 0.75;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  transform: translateX(-30%);
+}
+
+.signal-shimmer.run {
+  animation: signal-sweep 700ms ease-out forwards 180ms;
+}
+
+/* Shimmer over full word (no underline) */
+.signal-text {
+  position: relative;
+  display: inline-block;
+  overflow: hidden; /* clip shimmer strictly to the word */
+}
+.signal-text .shimmer-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0) 100%);
+  transform: translateX(-30%);
+  pointer-events: none;
+  opacity: 0; /* hidden until run */
+  mix-blend-mode: screen;
+}
+.signal-text.run .shimmer-overlay {
+  opacity: 0.9;
+  animation: signal-sweep 800ms ease-out forwards 120ms;
+}
+
+/* Outline styling for the word “signal” */
+.signal-outline {
+  /* Outline only; no fill */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--signal-outline-color, #111);
+  paint-order: stroke fill;
+  /* Fallback outline via shadow for non-webkit */
+  text-shadow:
+    0 1px 0 var(--signal-outline-color, #111),
+    0 -1px 0 var(--signal-outline-color, #111),
+    1px 0 0 var(--signal-outline-color, #111),
+    -1px 0 0 var(--signal-outline-color, #111);
+}
