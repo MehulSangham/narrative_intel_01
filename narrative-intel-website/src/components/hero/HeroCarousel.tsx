@@ -105,10 +105,10 @@ export function HeroCarousel() {
   const isSymbol = eyebrowItem.mode === 'symbol'
   const isMorse = eyebrowItem.mode === 'morse'
   const COLOR_MAP: Record<string, string> = {
-    'contested truth': '#6D28D9', // violet (triadic from coral)
-    'climate change': '#2CB67D', // green (split complement from coral)
+    'contested truth': '#F59E0B', // amber
+    'climate change': '#B45309', // copper
     'political instability': '#E24D3A', // coral (anchor)
-    'economic inequality': '#2563EB', // blue (split complement)
+    'economic inequality': '#2563EB', // blue
     'artificial intelligence': '#2563EB', // blue (shared)
   }
   const accentColor = COLOR_MAP[current.term] ?? '#111111'
