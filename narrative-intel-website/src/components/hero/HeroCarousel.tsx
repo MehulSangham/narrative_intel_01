@@ -254,6 +254,7 @@ export function HeroCarousel() {
             frame
             overlayCaption
             showCaption={false}
+            aspectClass={current.term === 'contested truth' ? 'aspect-[16/10] xl:aspect-[16/10]' : undefined}
           >
             {TERM_IMAGES[current.term] ? (
               <div className="relative w-full h-full">

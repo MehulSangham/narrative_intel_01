@@ -13,6 +13,7 @@ type HeroFigureProps = {
   frame?: boolean
   overlayCaption?: boolean
   showCaption?: boolean
+  aspectClass?: string
 }
 
 export function HeroFigure({
@@ -26,6 +27,7 @@ export function HeroFigure({
   frame = true,
   overlayCaption = false,
   showCaption = true,
+  aspectClass,
 }: HeroFigureProps) {
   return (
     <figure className="w-full h-full flex flex-col lg:justify-end">
@@ -33,7 +35,7 @@ export function HeroFigure({
         className={`relative ${frame ? 'rounded-[12px] overflow-hidden border border-black/15 bg-[#f6f3ea]' : ''}`}
         style={{ marginTop: 0 }}
       >
-        <div className={`relative w-full aspect-[4/3] xl:aspect-square`}>{children}</div>
+        <div className={`relative w-full ${aspectClass ?? 'aspect-[4/3] xl:aspect-square'}`}>{children}</div>
         {frame && (
           <div className="pointer-events-none absolute inset-0">
             {/* top-right corner */}
