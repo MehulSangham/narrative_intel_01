@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { HeroTexture } from './HeroTexture'
 import { HeroFigure } from './HeroFigure'
-import { Circle, Leaf, AlertTriangle, BarChart3, Brain } from 'lucide-react'
+// icons removed from indicators for a minimal dot UI
 
 type Slide = {
   term: string
@@ -112,13 +112,7 @@ export function HeroCarousel() {
     'artificial intelligence': '#2563EB', // blue (shared)
   }
   const accentColor = COLOR_MAP[current.term] ?? '#111111'
-  const ICON_MAP: Record<string, React.ComponentType<{ size?: number; color?: string; strokeWidth?: number; className?: string }>> = {
-    'contested truth': Circle,
-    'climate change': Leaf,
-    'political instability': AlertTriangle,
-    'economic inequality': BarChart3,
-    'artificial intelligence': Brain,
-  }
+  // indicator uses minimal dots; icon map no longer needed
   const typeProgress = current.term.length ? Math.min(1, typedText.length / current.term.length) : 1
   const eased = 1 - Math.pow(1 - typeProgress, 3)
   const dynamicWeight = Math.round(500 + eased * 200) // 500→700 as it types
@@ -278,23 +272,58 @@ export function HeroCarousel() {
 
       {/* CTA moved into the text column above */}
 
-      {/* Centered icon indicators: one per token */}
-      <div className="mt-5 flex w-full items-center justify-center gap-4" role="group" aria-label="Topics">
+      {/* Centered minimal dots with progress sweep */}
+      <div className="mt-5 flex w-full items-center justify-center gap-3" role="tablist" aria-label="Topics">
         {SLIDES.map((s, i) => {
           const color = COLOR_MAP[s.term] ?? '#111111'
-          const Icon = ICON_MAP[s.term] ?? Circle
           const isActive = i === index
           return (
-            <Icon
+            <button
               key={s.term}
-              size={16}
-              color={color}
-              strokeWidth={2.4}
-              className={isActive ? 'opacity-100 scale-110' : 'opacity-45'}
-            />
+              role="tab"
+              aria-selected={isActive}
+              aria-label={s.term}
+              onClick={() => setIndex(i)}
+              className="relative h-6 w-6 inline-flex items-center justify-center rounded-full focus:outline-none focus-visible:ring-2"
+              style={{
+                // subtle focus ring in accent
+                // @ts-ignore
+                ['--ring-color' as any]: color,
+              }}
+            >
+              <span
+                className="absolute inset-0 rounded-full"
+                style={{
+                  boxShadow: `inset 0 0 0 2px ${isActive ? color : hexToRgba(color, 0.4)}`,
+                }}
+              />
+              {/* progress sweep for active dot */}
+              {isActive && !prefersReducedMotion ? (
+                <span
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: `conic-gradient(${color} 0deg, transparent 0deg)`,
+                    WebkitMask: 'radial-gradient(circle, transparent 6px, black 6px)',
+                    mask: 'radial-gradient(circle, transparent 6px, black 6px)',
+                    animation: `sweep ${AUTO_PLAY_MS}ms linear forwards`,
+                    animationPlayState: isHovering ? 'paused' : 'running',
+                  }}
+                />
+              ) : null}
+              <span
+                className="relative block h-2 w-2 rounded-full"
+                style={{ backgroundColor: isActive ? hexToRgba(color, 0.25) : '#f6f3ea' }}
+              />
+            </button>
           )
         })}
       </div>
+      <style jsx>{`
+        @keyframes sweep {
+          from { background: conic-gradient(var(--accent, #111) 0deg, transparent 0deg); }
+          to { background: conic-gradient(var(--accent, #111) 360deg, transparent 0deg); }
+        }
+      `}</style>
 
       {/* No manual controls; term changes via autoplay only */}
     </div>
