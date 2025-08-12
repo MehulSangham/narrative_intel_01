@@ -106,9 +106,9 @@ export function HeroCarousel() {
   const isMorse = eyebrowItem.mode === 'morse'
   const COLOR_MAP: Record<string, string> = {
     'contested truth': '#F59E0B', // amber
-    'climate change': '#B45309', // copper
+    'climate change': '#16A34A', // green (original)
     'political instability': '#E24D3A', // coral (anchor)
-    'economic inequality': '#2563EB', // blue
+    'economic inequality': '#B45309', // copper
     'artificial intelligence': '#2563EB', // blue (shared)
   }
   const accentColor = COLOR_MAP[current.term] ?? '#111111'
