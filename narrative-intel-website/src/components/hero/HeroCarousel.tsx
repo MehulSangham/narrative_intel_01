@@ -238,6 +238,7 @@ export function HeroCarousel() {
             subtitle="A visual exploration of narrative signals"
             credit="Illustration: Narrative Intelligence"
             frame={current.term !== 'climate change'}
+            overlayCaption
           >
             {TERM_IMAGES[current.term] ? (
               <div className="relative w-full h-full p-2 md:p-3 bg-white">
