@@ -139,7 +139,11 @@ export function HeroCarousel() {
 
   // Optional per-term images for the right figure
   const TERM_IMAGES: Record<string, string> = {
+    'contested truth': '/images/hero-truth.png',
     'climate change': '/images/hero-climate.png',
+    'political instability': '/images/hero-political.png',
+    'economic inequality': '/images/hero-inequality.png',
+    'artificial intelligence': '/images/hero-artificial.png',
   }
 
   return (
@@ -234,7 +238,7 @@ export function HeroCarousel() {
                   fill
                   sizes="(min-width: 1280px) 420px, 100vw"
                   className="object-cover"
-                  priority={current.term === 'climate change'}
+                  priority={index === 0}
                 />
               </div>
             ) : (

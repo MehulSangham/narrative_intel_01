@@ -89,7 +89,7 @@ function VideoAutoplayTile() {
         playsInline
         muted
         preload="metadata"
-        poster="/images/hero-0.jpg"
+        poster="/images/hero-truth.png"
       >
         <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
         <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
