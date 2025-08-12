@@ -237,7 +237,7 @@ export function HeroCarousel() {
             title={current.term.charAt(0).toUpperCase() + current.term.slice(1)}
             subtitle="A visual exploration of narrative signals"
             credit="Illustration: Narrative Intelligence"
-            frame={current.term !== 'climate change'}
+            frame
             overlayCaption
             showCaption={false}
           >
