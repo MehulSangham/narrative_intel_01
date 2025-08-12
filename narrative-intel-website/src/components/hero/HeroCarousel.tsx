@@ -239,7 +239,7 @@ export function HeroCarousel() {
             credit="Illustration: Narrative Intelligence"
             frame={current.term !== 'climate change'}
             overlayCaption={false}
-            showCaption={false}
+            showCaption={true}
           >
             {TERM_IMAGES[current.term] ? (
               <div className="relative w-full h-full">
@@ -248,7 +248,7 @@ export function HeroCarousel() {
                   alt={`${current.term} visual`}
                   fill
                   sizes="(min-width: 1280px) 420px, 100vw"
-                  className="object-contain"
+                  className="object-cover"
                   style={{ objectPosition: TERM_OBJECT_POSITION[current.term] ?? '50% 50%' }}
                   priority={index === 0}
                 />
