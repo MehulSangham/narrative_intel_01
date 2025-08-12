@@ -146,6 +146,15 @@ export function HeroCarousel() {
     'artificial intelligence': '/images/hero-artificial.png',
   }
 
+  // Optional per-term focal points (object-position). Defaults to center.
+  const TERM_OBJECT_POSITION: Record<string, string> = {
+    'political instability': '50% 40%',
+    'climate change': '50% 50%',
+    'economic inequality': '50% 50%',
+    'artificial intelligence': '50% 50%',
+    'contested truth': '50% 50%',
+  }
+
   return (
     <div
       className="relative"
@@ -231,13 +240,14 @@ export function HeroCarousel() {
             frame={current.term !== 'climate change'}
           >
             {TERM_IMAGES[current.term] ? (
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full p-2 md:p-3 bg-white">
                 <Image
                   src={TERM_IMAGES[current.term]}
                   alt={`${current.term} visual`}
                   fill
                   sizes="(min-width: 1280px) 420px, 100vw"
-                  className="object-cover"
+                  className="object-contain"
+                  style={{ objectPosition: TERM_OBJECT_POSITION[current.term] ?? '50% 50%' }}
                   priority={index === 0}
                 />
               </div>
