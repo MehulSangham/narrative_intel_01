@@ -12,6 +12,7 @@ type HeroFigureProps = {
   fullHeight?: boolean
   frame?: boolean
   overlayCaption?: boolean
+  showCaption?: boolean
 }
 
 export function HeroFigure({
@@ -24,6 +25,7 @@ export function HeroFigure({
   fullHeight = false,
   frame = true,
   overlayCaption = false,
+  showCaption = true,
 }: HeroFigureProps) {
   return (
     <figure className="w-full h-full flex flex-col lg:justify-end">
@@ -42,7 +44,7 @@ export function HeroFigure({
             <span className="absolute left-3 bottom-3 h-[2px] w-[16px]" style={{ backgroundColor: accent, opacity: 0.35 }} />
           </div>
         )}
-        {overlayCaption && (
+        {overlayCaption && showCaption && (
           <figcaption className="absolute bottom-0 right-0 m-3 md:m-4 max-w-[90%] text-right">
             <div className="inline-block rounded-[8px] px-2.5 py-2" style={{
               background: 'linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.45) 100%)',
@@ -59,7 +61,7 @@ export function HeroFigure({
           </figcaption>
         )}
       </div>
-      {!overlayCaption && (
+      {!overlayCaption && showCaption && (
         <figcaption className="mt-2 select-text text-right">
           <div className="text-[11px] tracking-[0.12em] uppercase text-[#7a7368] mb-1">{kicker}</div>
           <div className="text-[16px] font-medium text-[#111] leading-tight">{title}</div>
