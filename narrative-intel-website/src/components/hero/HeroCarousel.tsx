@@ -162,10 +162,10 @@ export function HeroCarousel() {
       onMouseLeave={() => setIsHovering(false)}
     >
         <div
-          className="relative max-w-none grid grid-cols-1 xl:grid-cols-12 gap-6 xl:gap-8 items-start xl:items-center"
+          className="relative max-w-none grid grid-cols-1 xl:grid-cols-12 gap-6 xl:gap-8 items-start xl:items-start"
           style={{ minHeight: 'clamp(480px, 48svh, 640px)' }}
         >
-          <div className="relative order-1 xl:order-none xl:col-span-8 2xl:col-span-8 xl:pr-8 2xl:pr-10 z-10 xl:flex xl:flex-col xl:justify-center">
+          <div className="relative order-1 xl:order-none xl:col-span-8 2xl:col-span-8 xl:pr-8 2xl:pr-10 z-10 xl:flex xl:flex-col xl:justify-start">
           <div className="mb-6">
             <div className="relative inline-block">
               <span
@@ -226,6 +226,21 @@ export function HeroCarousel() {
               in the noise.
             </span>
           </h1>
+          {/* CTA moved under headline */}
+          <div className="mt-6 md:mt-8">
+            <Link
+              href={current.ctaHref}
+              onFocus={() => setCtaFocused(true)}
+              onBlur={() => setCtaFocused(false)}
+              className="inline-flex items-center h-12 px-6 rounded-[6px] bg-[#111111] text-white font-semibold text-[17px] hover:bg-[#1a1a1a] transition-colors border"
+              style={{
+                borderColor: accentColor,
+                boxShadow: ctaFocused ? `0 0 0 3px ${hexToRgba(accentColor, 0.25)}` : 'none',
+              }}
+            >
+              {current.ctaText}
+            </Link>
+          </div>
         </div>
         <div
           className="order-2 xl:order-none xl:col-span-4 2xl:col-span-4 w-full mt-10 xl:mt-0 xl:flex xl:flex-col xl:justify-end xl:max-h-full relative z-0"
@@ -261,21 +276,7 @@ export function HeroCarousel() {
         {/* baseline rule removed; token carries accent color */}
       </div>
 
-      {/* CTA placed below the grid to align figure caption with headline bottom */}
-      <div className="mt-6 md:mt-8">
-        <Link
-          href={current.ctaHref}
-          onFocus={() => setCtaFocused(true)}
-          onBlur={() => setCtaFocused(false)}
-          className="inline-flex items-center h-12 px-6 rounded-[6px] bg-[#111111] text-white font-semibold text-[17px] hover:bg-[#1a1a1a] transition-colors border"
-          style={{
-            borderColor: accentColor,
-            boxShadow: ctaFocused ? `0 0 0 3px ${hexToRgba(accentColor, 0.25)}` : 'none',
-          }}
-        >
-          {current.ctaText}
-        </Link>
-      </div>
+      {/* CTA moved into the text column above */}
 
       {/* Centered icon indicators: one per token */}
       <div className="mt-5 flex w-full items-center justify-center gap-4" role="group" aria-label="Topics">
