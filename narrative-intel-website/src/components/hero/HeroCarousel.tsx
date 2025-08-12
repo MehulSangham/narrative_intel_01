@@ -263,7 +263,7 @@ export function HeroCarousel() {
                   alt={`${current.term} visual`}
                   fill
                   sizes="(min-width: 1280px) 420px, 100vw"
-                  className="object-contain"
+                  className={current.term === 'contested truth' ? 'object-cover' : 'object-contain'}
                   style={{ objectPosition: TERM_OBJECT_POSITION[current.term] ?? '50% 50%' }}
                   priority={index === 0}
                 />
