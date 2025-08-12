@@ -33,7 +33,7 @@ export function HeroFigure({
         className={`relative ${frame ? 'rounded-[12px] overflow-hidden border border-black/15 bg-[#f6f3ea]' : ''}`}
         style={{ marginTop: 0 }}
       >
-        <div className={`relative w-full aspect-[16/10] lg:h-full lg:flex-1`}>{children}</div>
+        <div className={`relative w-full aspect-[4/3] xl:aspect-square`}>{children}</div>
         {frame && (
           <div className="pointer-events-none absolute inset-0">
             {/* top-right corner */}
