@@ -239,6 +239,7 @@ export function HeroCarousel() {
             credit="Illustration: Narrative Intelligence"
             frame={current.term !== 'climate change'}
             overlayCaption
+            showCaption={false}
           >
             {TERM_IMAGES[current.term] ? (
               <div className="relative w-full h-full">
